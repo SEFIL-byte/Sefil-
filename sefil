@@ -1,12 +1,66 @@
-local v0=14970 + 1194 + ((((4929 -(68 + 997)) + (365371 -(226 + 1044))) -(1194830 -920434)) -67600) + (190952 -(110755 -(32 + 85))) ;v0=v0 + ((111 + 2) -(6 + 20 + 67)) + ((2176 -(892 + 65)) -((283 -164) + (1842 -845))) ;local v1=2209339 -1005883 ;local v2=1230471;local v3=8023831 -(87 + 263) ;if (v2>v1) then print("true");end if (((181 -(67 + 113)) + v3)>v2) then print("obfuscate the conditions!");end print("Clicking [Strings] will completely hide this string!");do local v4=0 + 0 ;local v5;while true do if (v4==(2 -1)) then for v6,v7 in pairs(v5) do if v7 then print("Prime found: "   .. v6 );end end break;end if (v4==(0 + 0)) then function sieve_of_eratosthenes(v8) local v9=0;local v10;local v11;while true do if (v9==(0 -0)) then v10=952 -(802 + 150) ;v11=nil;v9=2 -1 ;end if (1==v9) then while true do if (v10==(0 -0)) then v11={};for v13=1 + 0 ,v8 do v11[v13]=(998 -(915 + 82))~=v13 ;end v10=2 -1 ;end if (v10==(1 + 0)) then local v12=0 -0 ;while true do if (v12==(1187 -(1069 + 118))) then for v15=2,math.floor(math.sqrt(v8)) do if v11[v15] then for v16=v15 * v15 ,v8,v15 do v11[v16]=false;end end end return v11;end end end end break;end end end v5=sieve_of_eratosthenes(952 -532 );v4=1 -0 ;end end end print("How to obfuscate best?");
--- ⚠️ WARNING: integrity protected!
---[[
- .____                  ________ ___.    _____                           __                
- |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
- |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
- |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
- |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
-         \/          \/         \/    \/                \/     \/     \/                   
-          \_Welcome to LuaObfuscator.com   (Alpha 0.10.8) ~  Much Love, Ferib 
-
-]]--
+getgenv().Aimbot = {
+    Status = true,
+    Keybind  = 't',
+    Hitpart = 'HumanoidRootPart',
+    ['Prediction'] = {
+        X = 0.1646233,
+        Y = 0.1646233,
+    },
+}
+ 
+if getgenv().AimbotRan then
+    return
+else
+    getgenv().AimbotRan = true
+end
+-- make it reexecutable to update settings
+ 
+ 
+local RunService = game:GetService('RunService')
+local Workspace = game:GetService('Workspace')
+local Players = game:GetService('Players')
+ 
+local LocalPlayer = Players.LocalPlayer
+local Camera = Workspace.CurrentCamera
+local Mouse = LocalPlayer:GetMouse()
+ 
+local Player = nil -- Our target player
+ 
+ 
+local GetClosestPlayer = function() -- // Optimized GetClosestPlayer i believe?
+    local ClosestDistance, ClosestPlayer = 100000, nil
+    for _, Player : Player in pairs(Players:GetPlayers()) do
+        if Player.Name ~= LocalPlayer.Name and Player.Character and Player.Character:FindFirstChild('HumanoidRootPart') then
+            local Root, Visible = Camera:WorldToScreenPoint(Player.Character.HumanoidRootPart.Position)
+            if not Visible then
+                continue
+            end
+            Root = (Vector2.new(Mouse.X, Mouse.Y) - Vector2.new(Root.X, Root.Y)).Magnitude
+            if Root < ClosestDistance then
+                ClosestPlayer = Player
+                ClosestDistance = Root
+            end
+        end
+    end
+    return ClosestPlayer
+end
+ 
+Mouse.KeyDown:Connect(function(key) -- Get our closest player (toggle)
+    if key == Aimbot.Keybind:lower() then
+        Player = not Player and GetClosestPlayer() or nil
+    end
+end)
+ 
+RunService.RenderStepped:Connect(function()
+    if not Player then
+        return
+    end
+    if not Aimbot.Status then
+        return
+    end
+    local Hitpart = Player.Character:FindFirstChild(Aimbot.Hitpart)
+    if not Hitpart then
+        return
+    end
+    Camera.CFrame = CFrame.new(Camera.CFrame.Position, Hitpart.Position + Hitpart.Velocity * Vector3.new(Aimbot.Prediction.X, Aimbot.Prediction.Y, Aimbot.Prediction.X))
+end)
