@@ -1,3 +1,5 @@
+local v0=14970 + 1194 + ((((4929 -(68 + 997)) + (365371 -(226 + 1044))) -(1194830 -920434)) -67600) + (190952 -(110755 -(32 + 85))) ;v0=v0 + ((111 + 2) -(6 + 20 + 67)) + ((2176 -(892 + 65)) -((283 -164) + (1842 -845))) ;local v1=2209339 -1005883 ;local v2=1230471;local v3=8023831 -(87 + 263) ;if (v2>v1) then print("true");end if (((181 -(67 + 113)) + v3)>v2) then print("obfuscate the conditions!");end print("Clicking [Strings] will completely hide this string!");do local v4=0 + 0 ;local v5;while true do if (v4==(2 -1)) then for v6,v7 in pairs(v5) do if v7 then print("Prime found: "   .. v6 );end end break;end if (v4==(0 + 0)) then function sieve_of_eratosthenes(v8) local v9=0;local v10;local v11;while true do if (v9==(0 -0)) then v10=952 -(802 + 150) ;v11=nil;v9=2 -1 ;end if (1==v9) then while true do if (v10==(0 -0)) then v11={};for v13=1 + 0 ,v8 do v11[v13]=(998 -(915 + 82))~=v13 ;end v10=2 -1 ;end if (v10==(1 + 0)) then local v12=0 -0 ;while true do if (v12==(1187 -(1069 + 118))) then for v15=2,math.floor(math.sqrt(v8)) do if v11[v15] then for v16=v15 * v15 ,v8,v15 do v11[v16]=false;end end end return v11;end end end end break;end end end v5=sieve_of_eratosthenes(952 -532 );v4=1 -0 ;end end end print("How to obfuscate best?");
+-- ⚠️ WARNING: integrity protected!
 --[[
  .____                  ________ ___.    _____                           __                
  |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
@@ -8,64 +10,3 @@
           \_Welcome to LuaObfuscator.com   (Alpha 0.10.8) ~  Much Love, Ferib 
 
 ]]--
-
--- Example Code:
-local a = ((16164 + (((3864 + 364101) - 274396) - 67600)) + (190952 - 110638))
-a = a + ((113 - (26 + 67)) + (1219 - (119 + 997))) -- Example obfuscation
-
--- To hide your precious values, try obfuscating them!
--- Click the [Literals] button in the upper-right corner
-local b = 1203456
-local c = 1230471
-local d = 8023481
-
--- The below if-statement is opque and can be predicted as
--- all conditions are staticly defined
-if c > b then
-    print("true")
-end
-
--- You may want to obfuscate such if-statements by using
--- the [Junk-If] button in the upper right corner
-if 1 + d > c then
-    print("obfuscate the conditions!")
-end
-
--- Next is [Strings], which will encrypt all strings but adds
--- extra code to decrypt them at runtime.
-print("Clicking [Strings] will completely hide this string!")
-
--- Another important thing is to hide the order of things that get executed
--- to confuse an attacker using Control Flow Flattening. With [CFF v1] we can hide
--- the control flow of the following blocks.
-do
-   function sieve_of_eratosthenes(n)
-   local is_prime = { }
-       for i = 1, n do
-           is_prime[i] = 1 ~= i
-       end
-       for i = 2, math.floor(math.sqrt(n)) do
-           if is_prime[i] then
-               for j = i* i, n, i do
-                   is_prime[j] = false
-               end
-           end
-       end
-       return is_prime
-   end
-   local primes = sieve_of_eratosthenes(420)
-   for key, value in pairs(primes) do
-       if (value) then
-           print("Prime found: " .. key)
-       end
-   end
-end
-
--- You might be satisfied with your result, but before sharing your work you should
--- use [Minify] (under Miscellaneous) to destroy all local variables and comments.
--- Please note that some pre-configured obfuscate buttons already do this for you ;)
-print("How to obfuscate best?")
-
--- The highest level of obfuscation is done through virtualization,
--- in our case this means we will be running Lua inside Lua using the
--- Ironbrew2 virtulization tool. Ready? click [Demo VM] and see what happens!
